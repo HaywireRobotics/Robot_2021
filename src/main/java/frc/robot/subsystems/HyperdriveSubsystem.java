@@ -164,8 +164,8 @@ public final class HyperdriveSubsystem extends SubsystemBase {
       this.rightController.setP(Constants.Hyperdrive.kPDriveVel);
       this.leftController.setD(Constants.Hyperdrive.kD);
       this.rightController.setD(Constants.Hyperdrive.kD);
-      this.leftController.setFF(0.000015*10*10*10);
-      this.rightController.setFF(0.000015*10*10*10);
+      this.leftController.setFF(0.000015*10*10*0.15);
+      this.rightController.setFF(0.000015*10*10*0.15);
 
       this.myRobot = new DifferentialDrive(this.leftFront,this.rightFront);
       this.leftEncoder = this.leftFront.getEncoder();
