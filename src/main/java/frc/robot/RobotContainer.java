@@ -125,7 +125,7 @@ public final class RobotContainer {
         String trajectoryJSON = "paths/output/" + files[i];
         Trajectory trajectory = new Trajectory();
         try {
-          System.out.println("Getting zee path.");
+          System.out.println("Getting " + files[i]);
           Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
           trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
         } catch (IOException ex) {

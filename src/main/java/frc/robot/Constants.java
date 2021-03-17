@@ -37,7 +37,7 @@ public final class Constants {
       // each tire is 6 inches diameter.
       //public static final double kEncoderDistancePerPulse = 0.0114; //this number MIGHT be VERY wrong :)
       // public static final double kEncoderDistancePerPulse = 0.478;
-      public static final double kEncoderDistancePerPulse = (0.478 / 0.342) * 1.2*0.85694;   
+      public static final double kEncoderDistancePerPulse = (0.478 / 0.342) * 1.2*0.85694 * 1.125;   
    
    }
 
