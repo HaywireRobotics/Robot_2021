@@ -38,7 +38,7 @@ public final class HyperdriveSubsystem extends SubsystemBase {
    private final CANPIDController rightController;
    private final AHRS gyro = new AHRS();
    private final DifferentialDriveOdometry odometry;
-
+   private boolean forward = true;
    public final boolean getRobotDirectionInverted() {
       return this.robotDirectionInverted;
    }
@@ -48,8 +48,12 @@ public final class HyperdriveSubsystem extends SubsystemBase {
    }
 
    public void periodic() {
-      odometry.update(gyro.getRotation2d().times(1.0), leftEncoder.getPosition(), -rightEncoder.getPosition());
-  if (true) {
+      if (forward) {
+         odometry.update(gyro.getRotation2d().times(1.0), leftEncoder.getPosition(), -rightEncoder.getPosition());
+      } else {
+         odometry.update(gyro.getRotation2d().times(1.0), rightEncoder.getPosition(), -leftEncoder.getPosition());
+      }
+      if (true) {
      double leftEncoderPosition = leftEncoder.getPosition();
      double rightEncoderPosition = rightEncoder.getPosition();
      double leftVelocity = leftEncoder.getVelocity();
@@ -101,8 +105,14 @@ public final class HyperdriveSubsystem extends SubsystemBase {
    public void resetOdometry(Pose2d pose) {
       resetEncoders();
       gyro.reset();
+      // gyro.setAngleAdjustment(adjustment);
       odometry.resetPosition(pose, gyro.getRotation2d());
       System.out.println("Resetting Odometry: " + odometry.getPoseMeters());
+   }
+   public void flipOdometry(Pose2d pose) {
+      resetEncoders();
+      odometry.resetPosition(getPose(), gyro.getRotation2d().plus(new Rotation2d(3.14159268)));
+      System.out.println("Offsetting Odometry: " + odometry.getPoseMeters());
    }
 
    public void resetOdo() {
@@ -126,8 +136,15 @@ public final class HyperdriveSubsystem extends SubsystemBase {
    }
    public void setWheelVelocity(double left, double right) {
       // System.out.println("left: " + left + "right" + right);
+      forward = true;
       leftController.setReference(left, ControlType.kVelocity);
       rightController.setReference(-right, ControlType.kVelocity);
+   }
+   public void setReverseWheelVelocity(double left, double right) {
+      // System.out.println("left: " + left + "right" + right);
+      forward = false;
+      leftController.setReference(-right, ControlType.kVelocity);
+      rightController.setReference(left, ControlType.kVelocity);
    }
    public double getHeading() {
       return gyro.getRotation2d().times(-1.0).getDegrees();

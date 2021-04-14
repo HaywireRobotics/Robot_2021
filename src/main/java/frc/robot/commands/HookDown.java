@@ -9,6 +9,7 @@ public final class HookDown extends CommandBase {
    private final ClimbSubsystem m_subsystem;
 
    public void initialize() {
+      this.m_subsystem.setBrakeMode(false);
    }
 
    public void execute() {

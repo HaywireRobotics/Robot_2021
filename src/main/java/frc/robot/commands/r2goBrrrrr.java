@@ -30,7 +30,6 @@ public class r2goBrrrrr extends SequentialCommandGroup {
     .setKinematics(Constants.Hyperdrive.kDriveKinematics).addConstraint(autoVoltageConstraint);
 
     RamseteCommand ramseteCommand;
-
   public boolean isFinished() {
     return ramseteCommand.isFinished();
   }
@@ -46,7 +45,6 @@ public class r2goBrrrrr extends SequentialCommandGroup {
       hyperdrive::setWheelVelocity, 
       hyperdrive
     );
-
     this.hyperdrive.resetOdometry(trajectory.getInitialPose());
     this.trajectory = trajectory;
 

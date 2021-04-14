@@ -1,9 +1,9 @@
 {
   "lengthUnit": "Inch",
   "exportUnit": "Same as Project",
-  "maxVelocity": 60.0,
-  "maxAcceleration": 20.0,
+  "maxVelocity": 100.0,
+  "maxAcceleration": 35.0,
   "wheelBase": 22.0,
-  "gameName": "Infinite Recharge",
+  "gameName": "Bounce Path",
   "outputDir": "../src/main/deploy/paths"
 }

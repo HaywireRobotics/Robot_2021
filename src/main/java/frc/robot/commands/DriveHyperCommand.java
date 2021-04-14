@@ -24,13 +24,18 @@ public final class DriveHyperCommand extends CommandBase {
       double rightPower = 0.0D;
       double leftJoystickVal = this.leftJoystick.getY();
       double rightJoystickVal = this.rightJoystick.getY();
-      if (Math.abs(leftJoystickVal) > 0.15D) {
-         leftPower = leftJoystickVal;
+      if (leftJoystickVal > 0.15D) {
+         leftPower = (leftJoystickVal - 0.15) / 1.2;
+      } else if (leftJoystickVal < -0.15D) {
+         leftPower = (leftJoystickVal + 0.15) / 1.2;
       }
 
-      if (Math.abs(rightJoystickVal) > 0.15D) {
-         rightPower = rightJoystickVal;
+      if (rightJoystickVal > 0.15D) {
+         rightPower = (rightJoystickVal - 0.15) / 1.2;
+      } else if (rightJoystickVal < -0.15D) {
+         rightPower = (rightJoystickVal + 0.15) / 1.2;
       }
+
 
       if (this.hyperdriveSubsystem.getRobotDirectionInverted()) {
          this.hyperdriveSubsystem.tankDrive(-rightPower, -leftPower);
